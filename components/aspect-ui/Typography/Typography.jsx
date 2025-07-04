@@ -1,3 +1,4 @@
+import React from "react";
 import { cn } from "../../utils/cn";
 
 export const Typography = ({
@@ -8,6 +9,7 @@ export const Typography = ({
 	...rest
 }) => {
 	const TagName = tagName;
+
 	const getStyles = () => {
 		switch (variant) {
 			case "h1":
@@ -22,16 +24,16 @@ export const Typography = ({
 				return "text-h5";
 			case "h6":
 				return "text-h6";
-			case "body1":
-				return "text-body1";
-			case "body2":
-				return "text-body2";
+			case "body-1":
+				return "text-body-1";
+			case "body-2":
+				return "text-body-2";
 			case "caption":
 				return "text-caption";
-			case "display1":
-				return "text-display1";
-			case "display2":
-				return "text-display2";
+			case "display-1":
+				return "text-display-1";
+			case "display-2":
+				return "text-display-2";
 			default:
 				return "";
 		}
@@ -40,13 +42,7 @@ export const Typography = ({
 	const styles = getStyles();
 
 	return (
-		<TagName
-			className={cn(
-				"text-primary-800 dark:text-primary-200",
-				styles,
-				className
-			)}
-			{...rest}>
+		<TagName className={cn("text-text-muted", styles, className)} {...rest}>
 			{children}
 		</TagName>
 	);
