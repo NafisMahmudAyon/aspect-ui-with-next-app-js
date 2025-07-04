@@ -1,90 +1,57 @@
-"use client";
+'use client'
 
-import { cn } from "../utils/cn";
+import React from 'react'
+import { cn } from '../../utils/cn'
 
 export const Switch = ({
-	checked,
-	onChange,
-	disabled = false,
-	label,
-	size = "md",
-	className = "",
-	switchClassName = "",
-	activeClassName = "",
-	deactiveClassName = "",
-	activeSwitchClassName = "",
-	deactiveSwitchClassName = "",
-	labelClassName = "",
-	switchIconEnabled = true,
-	activeSwitchIcon,
-	deactiveSwitchIcon,
+  checked,
+  onChange,
+  disabled = false,
+  label,
+  size = 'medium',
+  className = '',
+  switchClassName = '',
+  activeClassName = '',
+  deactiveClassName = '',
+  activeSwitchClassName = '',
+  deactiveSwitchClassName = '',
+  labelClassName = '',
+  switchIconEnabled = true,
+  activeSwitchIcon,
+  deactiveSwitchIcon
 }) => {
-	const handleChange = (event) => {
-		onChange(event.target.checked);
-	};
 
-	const sizeClasses = {
-		sm: "w-[28px] h-[16px]",
-		md: "w-[36px] h-[20px]",
-		lg: "w-[48px] h-[28px]",
-	};
+  const sizeClasses = {
+    small: 'w-[2rem] h-[1.15rem]',
+    medium: 'w-[2.5rem] h-[1.406rem]',
+    large: 'w-[3rem] h-[1.687rem]',
+  }
 
-	const switchSizeClasses = {
-		sm: "size-[12px]",
-		md: "size-[16px]",
-		lg: "size-[22px]",
-	};
+  const switchSizeClasses = {
+    small: cn('size-[calc(1.15rem-3px)]', checked ? cn('translate-x-[calc(100%-2px)] transform bg-primary-foreground text-primary', activeSwitchClassName) : cn('bg-primary text-primary-foreground translate-x-[2px]', deactiveSwitchClassName)),
+    medium: cn('size-[calc(1.406rem-3px)]', checked ? cn('translate-x-[calc(100%-2px)] transform bg-primary-foreground text-primary', activeSwitchClassName) : cn('bg-primary text-primary-foreground translate-x-[2px]', deactiveSwitchClassName)),
+    large: cn('size-[calc(1.687rem-3px)]', checked ? cn('translate-x-[calc(100%-3px)] transform bg-primary-foreground text-primary', activeSwitchClassName) : cn('bg-primary text-primary-foreground translate-x-[2px]', deactiveSwitchClassName)),
+  }
 
-	return (
-		<label
-			className={cn(
-				"inline-flex cursor-pointer items-center",
-				disabled ? "cursor-not-allowed opacity-50" : "",
-				className
-			)}>
-			<div className={cn("relative", switchClassName)}>
-				<input
-					type="checkbox"
-					className={cn("sr-only")}
-					checked={checked}
-					onChange={handleChange}
-					disabled={disabled}
-				/>
-				<div
-					className={cn(
-						"rounded-full shadow-inner transition-colors duration-300 ease-in-out",
-						sizeClasses[size],
-						checked
-							? cn("bg-primary-800 dark:bg-primary-200", activeClassName)
-							: cn("bg-primary-200 dark:bg-primary-800", deactiveClassName)
-					)}></div>
-				<div
-					className={cn(
-						"absolute -translate-y-1/2 top-1/2 left-0.5 rounded-full flex items-center justify-center shadow-sm leading-none transition-transform duration-300 ease-in-out p-0.5",
-						switchSizeClasses[size],
-						checked
-							? cn(
-									"translate-x-[calc(100%-0.125rem)] transform bg-primary-200 dark:bg-primary-900",
-									activeSwitchClassName
-							  )
-							: cn(
-									"bg-primary-900 dark:bg-primary-200 text-primary-200 dark:text-primary-900",
-									deactiveSwitchClassName
-							  )
-					)}>
-					{switchIconEnabled && activeSwitchIcon && (
-						<>
-							{deactiveSwitchIcon ? (
-								<>{checked ? activeSwitchIcon : deactiveSwitchIcon}</>
-							) : (
-								activeSwitchIcon
-							)}
-						</>
-					)}
-				</div>
-			</div>
-			{label && <span className={cn("ml-3", labelClassName)}>{label}</span>}
-		</label>
-	);
-};
-
+  return (
+    <div
+      className={cn("inline-flex cursor-pointer items-center", disabled ? 'cursor-not-allowed opacity-50 pointer-events-none' : '', className)}
+    >
+      <div
+        className={cn("inline-flex h-[1.15rem] w-8 shrink-0 items-center rounded-full border border-transparent shadow-xs transition-all outline-none", sizeClasses[size], checked ? cn('bg-primary', activeClassName) : cn('bg-primary-foreground', deactiveClassName, switchClassName))}
+        onClick={() => onChange(!checked)}
+      >
+        <div
+          className={cn("rounded-full flex items-center justify-center shadow-sm leading-none transition-transform duration-300 ease-in-out", switchSizeClasses[size])}
+        >
+          {switchIconEnabled && activeSwitchIcon && (
+            <>
+              {deactiveSwitchIcon ? <>{checked ? activeSwitchIcon : deactiveSwitchIcon}</> : activeSwitchIcon}
+            </>
+          )}
+        </div>
+      </div>
+      {label && <span className={cn("ml-3 text-text", labelClassName)}>{label}</span>}
+    </div>
+  )
+}

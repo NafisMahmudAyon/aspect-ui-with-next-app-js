@@ -2,7 +2,7 @@
 
 import { createContext, useContext } from "react";
 
-export const DropdownContext = createContext(undefined);
+const DropdownContext = createContext(undefined);
 
 export const DropdownProvider = ({ children, value }) => {
 	return (
@@ -19,4 +19,3 @@ export const useDropdown = () => {
 	}
 	return context;
 };
-

@@ -63,4 +63,3 @@ export const DotButton = forwardRef(
 );
 
 DotButton.displayName = "DotButton";
-

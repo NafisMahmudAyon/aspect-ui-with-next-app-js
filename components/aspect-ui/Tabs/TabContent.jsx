@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "../utils/cn";
+import { cn } from "../../utils/cn";
 import { useTabs } from "./TabsContext";
 
 export const TabContent = ({ children, id, className = "", ...rest }) => {
@@ -9,11 +9,8 @@ export const TabContent = ({ children, id, className = "", ...rest }) => {
 	if (activeTab !== id) return null;
 
 	return (
-		<div
-			className={cn("text-primary-800 dark:text-primary-200 ", className)}
-			{...rest}>
+		<div className={cn(className)} {...rest}>
 			{children}
 		</div>
 	);
 };
-

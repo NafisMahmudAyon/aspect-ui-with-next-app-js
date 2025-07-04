@@ -1,6 +1,6 @@
 "use client";
 import { cloneElement, forwardRef, isValidElement } from "react";
-import { cn } from "../utils/cn";
+import { cn } from "../../utils/cn";
 
 export const CarouselItem = forwardRef(
 	({ children, asChild, className, ...props }, ref) => {
@@ -26,4 +26,3 @@ export const CarouselItem = forwardRef(
 );
 
 CarouselItem.displayName = "CarouselItem";
-

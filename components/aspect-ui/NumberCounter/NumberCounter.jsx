@@ -1,10 +1,10 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { cn } from "../utils/cn";
+import { cn } from "../../utils/cn";
 
 export const NumberCounter = ({
 	end,
-	duration,
+	duration = 2000,
 	decimals = 0,
 	onVisible = false,
 	repeatOnVisible = false,
@@ -53,15 +53,8 @@ export const NumberCounter = ({
 	}, [end, duration, onVisible, repeatOnVisible]);
 
 	return (
-		<div
-			className={cn(
-				"text-primary-800 dark:text-primary-200 text-h4",
-				className
-			)}
-			ref={counterRef}
-			{...rest}>
+		<div className={cn("text-text", className)} ref={counterRef} {...rest}>
 			{count.toFixed(decimals)}
 		</div>
 	);
 };
-

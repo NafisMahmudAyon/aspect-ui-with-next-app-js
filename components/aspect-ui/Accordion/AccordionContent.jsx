@@ -1,20 +1,16 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { cn } from "../utils/cn";
+import { cn } from "../../utils/cn";
 import { useAccordion } from "./AccordionContext";
 
 export const AccordionContent = ({
 	children,
 	isOpen,
 	className = "",
-	reset = false,
 	...rest
 }) => {
-	const { contentClassName: accordionContentClassName, reset: accordionReset } =
-		useAccordion();
-
-	const accordionContentReset = accordionReset ?? reset;
+	const { contentClassName: accordionContentClassName } = useAccordion();
 
 	return (
 		<AnimatePresence initial={false}>
@@ -30,14 +26,7 @@ export const AccordionContent = ({
 					transition={{ duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] }}>
 					<div
 						className={cn(
-							"overflow-hidden border-t p-4",
-							isOpen
-								? accordionContentReset
-									? ""
-									: "border-primary-950 dark:border-primary-100 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200"
-								: accordionContentReset
-								? ""
-								: "border-primary-950 dark:border-primary-100",
+							"overflow-hidden border-t border-border bg-bg p-4 text-sm",
 							accordionContentClassName,
 							className
 						)}
@@ -49,4 +38,3 @@ export const AccordionContent = ({
 		</AnimatePresence>
 	);
 };
-

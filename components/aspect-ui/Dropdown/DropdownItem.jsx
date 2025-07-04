@@ -1,4 +1,5 @@
-import { cn } from "../utils/cn";
+"use client";
+import { cn } from "../../utils/cn";
 import { useDropdown } from "./DropdownContext";
 
 export const DropdownItem = ({
@@ -7,6 +8,7 @@ export const DropdownItem = ({
 	activeClassName = "",
 	onClick,
 	isSelected = false,
+	isLink = false,
 	...rest
 }) => {
 	const { closeDropdown } = useDropdown();
@@ -17,21 +19,37 @@ export const DropdownItem = ({
 		}
 		closeDropdown();
 	};
-
+	if (isLink === true) {
+		return (
+			<a
+				href="#"
+				className={cn(
+					"block px-4 py-2 text-sm text-nowrap hover:bg-bg-light/80",
+					className,
+					isSelected ? cn("bg-bg-light", activeClassName) : ""
+				)}
+				role="option"
+				area-selected={isSelected}
+				onClick={handleClick}
+				data-selected={isSelected}
+				{...rest}>
+				{children}
+			</a>
+		);
+	}
 	return (
-		<a
-			href="#"
+		<div
 			className={cn(
-				"block px-4 py-2 text-sm bg-primary-100 dark:bg-primary-900 hover:bg-primary-200 dark:hover:bg-primary-800 text-primary-800 dark:text-primary-200 hover:text-primary-900 dark:hover:text-primary-100 text-nowrap",
+				"block px-4 py-2 text-sm text-nowrap hover:bg-bg-light/80",
 				className,
-				isSelected ? activeClassName : ""
+				isSelected ? cn("bg-bg-light", activeClassName) : ""
 			)}
-			role="menuitem"
+			are-selected={isSelected}
+			role="option"
 			onClick={handleClick}
 			data-selected={isSelected}
 			{...rest}>
 			{children}
-		</a>
+		</div>
 	);
 };
-

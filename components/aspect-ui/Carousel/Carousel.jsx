@@ -1,7 +1,7 @@
 "use client";
 import useEmblaCarousel from "embla-carousel-react";
 import { forwardRef } from "react";
-import { cn } from "../utils/cn";
+import { cn } from "../../utils/cn";
 import { CarouselContext } from "./CarouselContext";
 import { CarouselViewport } from "./Viewport";
 
@@ -30,4 +30,3 @@ const Carousel = forwardRef(
 Carousel.displayName = "Carousel";
 
 export { Carousel };
-

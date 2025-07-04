@@ -1,6 +1,6 @@
 "use client";
 import { forwardRef } from "react";
-import { cn } from "../utils/cn";
+import { cn } from "../../utils/cn";
 
 export const CarouselSlides = forwardRef(
 	({ children, className, ...props }, ref) => {
@@ -13,4 +13,3 @@ export const CarouselSlides = forwardRef(
 );
 
 CarouselSlides.displayName = "CarouselSlides";
-

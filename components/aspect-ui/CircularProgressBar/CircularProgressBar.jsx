@@ -1,15 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { cn } from "../utils/cn";
+import { cn } from "../../utils/cn";
 
 export const CircularProgressBar = ({
 	value = 75,
 	className = "",
 	onVisible,
 	duration = 2,
-	strokeColor = "#CCCCCC",
-	strokeFillColor = "#333333",
+	strokeColor = "var(--color-bg-light)",
+	strokeFillColor = "var(--color-primary)",
 	strokeWidth = 2,
 	contentClassName = "",
 	hideValue = false,
@@ -20,9 +20,12 @@ export const CircularProgressBar = ({
 	const [isVisible, setIsVisible] = useState(false);
 	const [percentage, setPercentage] = useState(0);
 	const svgRef = useRef(null);
-	const circleRef = useRef(null);
 
-	const durationValue = (duration * 1000) / value;
+	// Clamp value to avoid unexpected dashoffset results
+	const clampedValue = Math.min(Math.max(value, 0), 100);
+
+	// Calculate how long each increment should take
+	const durationValue = (duration * 1000) / clampedValue;
 
 	useEffect(() => {
 		const observer = new IntersectionObserver(
@@ -36,15 +39,15 @@ export const CircularProgressBar = ({
 			}
 		);
 
-		const currentRef = svgRef.current;
-		if (currentRef) {
-			observer.observe(currentRef);
+		if (svgRef.current) {
+			observer.observe(svgRef.current);
 		}
 
 		return () => {
-			if (currentRef) {
-				observer.unobserve(currentRef);
+			if (svgRef.current) {
+				observer.unobserve(svgRef.current);
 			}
+			observer.disconnect();
 		};
 	}, []);
 
@@ -53,33 +56,31 @@ export const CircularProgressBar = ({
 			setPercentage(0);
 		} else if (isVisible) {
 			const interval = setInterval(() => {
-				setPercentage((prevPercentage) => {
-					const nextPercentage = Math.min(prevPercentage + 1, value);
-					if (nextPercentage >= value) {
+				setPercentage((prev) => {
+					if (prev < clampedValue) {
+						return Math.min(prev + 1, clampedValue);
+					} else {
 						clearInterval(interval);
+						return prev;
 					}
-					return nextPercentage;
 				});
 			}, durationValue);
 
 			return () => clearInterval(interval);
 		}
-	}, [isVisible, onVisible, value, durationValue]);
+	}, [onVisible, isVisible, clampedValue, durationValue]);
 
 	return (
 		<div
 			className={cn("relative size-24", className)}
 			onClick={onClick}
 			role="progressbar"
-			aria-valuenow={percentage}
-			aria-valuemin="0"
-			aria-valuemax="100"
 			{...rest}>
 			<div className="absolute left-0 top-0 h-full w-full origin-center -rotate-90 transform">
+				{/* Background circle */}
 				<svg
 					className="absolute left-1/2 top-1/2 z-0 h-full w-full -translate-x-1/2 -translate-y-1/2"
-					viewBox="0 0 24 24"
-					ref={svgRef}>
+					viewBox="0 0 24 24">
 					<circle
 						cx="12"
 						cy="12"
@@ -90,11 +91,12 @@ export const CircularProgressBar = ({
 						strokeWidth={strokeWidth}
 					/>
 				</svg>
+				{/* Progress circle */}
 				<svg
 					className="absolute left-1/2 top-1/2 z-10 h-full w-full -translate-x-1/2 -translate-y-1/2 stroke-slate-600"
-					viewBox="0 0 24 24">
+					viewBox="0 0 24 24"
+					ref={svgRef}>
 					<circle
-						ref={circleRef}
 						cx="12"
 						cy="12"
 						r="10"
@@ -105,21 +107,19 @@ export const CircularProgressBar = ({
 						strokeWidth={strokeWidth}
 						style={{
 							strokeDashoffset: `${((100 - percentage) * 62.83) / 100}`,
-							transition: "stroke-dashoffset 0.1s ease-out",
 						}}
 					/>
 				</svg>
+				{/* Center content */}
 				<span
 					className={cn(
-						"absolute inset-0 flex h-full w-full rotate-90 items-center justify-center text-inherit",
+						"absolute inset-0 flex h-full w-full rotate-90 items-center justify-center text-text",
 						contentClassName
 					)}>
-					{children || (!hideValue && `${percentage}%`)}
+					{!children && !hideValue && <>{percentage}%</>}
+					{children && <>{children}</>}
 				</span>
 			</div>
 		</div>
 	);
 };
-
-export default CircularProgressBar;
-

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { cn } from "../utils/cn";
+import { cn } from "../../utils/cn";
 import { AccordionProvider } from "./AccordionContext";
 
 export const Accordion = ({
@@ -20,7 +20,6 @@ export const Accordion = ({
 	headerClassName = "",
 	activeHeaderClassName = "",
 	contentClassName = "",
-	reset = false,
 	...rest
 }) => {
 	const [openItems, setOpenItems] = useState(activeItem ?? []);
@@ -51,7 +50,6 @@ export const Accordion = ({
 				headerClassName,
 				activeHeaderClassName,
 				contentClassName,
-				reset,
 			}}>
 			<div className={cn("space-y-2", className)} {...rest}>
 				{children}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { cn } from "../utils/cn";
+import { cn } from "../../utils/cn";
 
 export const ProgressBar = ({
 	value,
@@ -18,18 +18,13 @@ export const ProgressBar = ({
 	max = 100,
 	...rest
 }) => {
-	// Ensure value is within min and max range
 	const clampedValue = Math.min(Math.max(value, min), max);
-	// Calculate percentage
 	const [percentage, setPercentage] = useState(
 		((clampedValue - min) / (max - min)) * 100
 	);
 
 	const durationValue = (duration * 1000) / value;
-
-	// Ref for the progress bar
 	const progressBarRef = useRef(null);
-	// State to track visibility
 	const [isVisible, setIsVisible] = useState(false);
 
 	useEffect(() => {
@@ -40,7 +35,7 @@ export const ProgressBar = ({
 			{
 				root: null,
 				rootMargin: "0px",
-				threshold: 0.5, // Adjust this threshold as needed
+				threshold: 0.5,
 			}
 		);
 
@@ -84,38 +79,30 @@ export const ProgressBar = ({
 			className={cn("my-2 flex w-full items-center gap-4", className)}
 			{...rest}>
 			{contentPosition === "left" && (
-				<span
-					className={cn(
-						"min-w-10 text-primary-800 dark:text-primary-200",
-						contentClassName
-					)}>
+				<span className={cn("min-w-10 text-text", contentClassName)}>
 					{!children && <>{`${percentage}%`}</>}
 					{children && children}
 				</span>
 			)}
 			<div
 				className={cn(
-					"flex-1 overflow-hidden rounded-full border border-primary-800 dark:border-primary-200 p-1 bg-primary-100 dark:bg-primary-900",
+					"flex-1 overflow-hidden rounded-full border border-border p-1 bg-bg-light",
 					containerClassName
 				)}>
 				<div
 					className={cn(
-						"relative flex h-4 rounded-full bg-primary-800 dark:bg-primary-200",
+						"relative flex h-4 rounded-full bg-primary",
 						fillClassName
 					)}
 					role="progressbar"
 					aria-valuenow={clampedValue}
 					aria-valuemin={min}
 					aria-valuemax={max}
-					style={{ width: `${percentage}%` }} // Initial width for animation
+					style={{ width: `${percentage}%` }}
 					ref={progressBarRef}></div>
 			</div>
 			{contentPosition === "right" && (
-				<span
-					className={cn(
-						"min-w-10 text-primary-800 dark:text-primary-200",
-						contentClassName
-					)}>
+				<span className={cn("min-w-10 text-text", contentClassName)}>
 					{!children && <>{`${percentage}%`}</>}
 					{children && children}
 				</span>
@@ -123,4 +110,3 @@ export const ProgressBar = ({
 		</div>
 	);
 };
-

@@ -1,50 +1,50 @@
-"use client";
+'use client'
 
-import { Avatar as Icon } from "../Icon/Avatar";
-import { cn } from "../utils/cn";
+import { User } from 'lucide-react'
+import React from 'react'
+import { cn } from '../../utils/cn'
 
 export const AvatarImage = ({
-	className = "",
-	name,
-	src,
-	altText,
-	...rest
+  className = '',
+  name,
+  src,
+  altText,
+  ...rest
 }) => {
-	let nameX;
+  let nameX
 
-	if (name !== undefined) {
-		if (name.split(" ").length > 1) {
-			nameX = `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`;
-		} else {
-			nameX = `${name[0]}`;
-		}
-	}
+  if (name !== undefined) {
+    if (name.split(' ').length > 1) {
+      nameX = `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`
+    } else {
+      nameX = `${name[0]}`
+    }
+  }
 
-	if (src) {
-		return (
-			<img
-				src={src}
-				alt={altText || "alt text"}
-				{...(name && { title: name })}
-				className={cn(
-					"aspect-square h-auto max-w-full overflow-hidden rounded-full object-cover",
-					className
-				)}
-				{...rest}
-			/>
-		);
-	}
-	if (!src && name) {
-		return (
-			<span className={className} title={name} {...rest}>
-				{nameX || "A"}
-			</span>
-		);
-	}
-	return (
-		<>
-			<Icon />
-		</>
-	);
-};
-
+  if (src) {
+    return (
+      <img
+        src={src}
+        alt={altText || 'alt text'}
+        {...(name && { title: name })}
+        className={cn(
+          'aspect-square rounded-full h-auto max-w-full overflow-hidden object-cover',
+          className
+        )}
+        {...rest}
+      />
+    )
+  }
+  if (!src && name) {
+    return (
+      <span className={className} title={name} {...rest}>
+        {nameX || 'A'}
+      </span>
+    )
+  }
+  return (
+    <>
+      <User />
+    </>
+  )
+}

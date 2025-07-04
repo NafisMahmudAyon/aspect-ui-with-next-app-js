@@ -1,10 +1,10 @@
 "use client";
 
-import { cn } from "../utils/cn";
+import { cn } from "../../utils/cn";
 import { useToggleButtonGroup } from "./ToggleButtonGroupContext";
 
 export const ToggleButton = ({ value, children, className = "", ...rest }) => {
-	const { selectedValues, handleChange, outline, disabled } =
+	const { selectedValues, handleChange, outline, disabled, size } =
 		useToggleButtonGroup();
 
 	const isSelected = Array.isArray(selectedValues)
@@ -12,26 +12,33 @@ export const ToggleButton = ({ value, children, className = "", ...rest }) => {
 		: selectedValues === value;
 
 	const getButtonStyles = () => {
-		if (disabled) {
-			return "text-secondary-300 dark:text-secondary-900";
-		}
-
 		if (outline) {
 			return isSelected
-				? "border border-primary-200 dark:border-primary-900 bg-primary-200 dark:bg-primary-900 text-primary-800 dark:text-primary-200 "
-				: "border border-primary-200 dark:border-primary-900 hover:border-primary-200 dark:hover:border-primary-900 hover:bg-primary-200 dark:hover:bg-primary-900 text-primary-800 dark:text-primary-200";
+				? "border border-border bg-bg-light text-text"
+				: "border border-border bg-transparent shadow-xs hover:bg-bg-light hover:text-text-muted";
 		}
 
-		return isSelected
-			? "bg-primary-200 dark:bg-primary-900 text-primary-800 dark:text-primary-200"
-			: "hover:bg-primary-200 dark:hover:bg-primary-900 text-primary-800 dark:text-primary-200 ";
+		return isSelected ? "bg-bg-light text-text" : "bg-transparent";
+	};
+
+	const getSizeStyles = () => {
+		switch (size) {
+			case "small":
+				return "h-8 px-1.5 min-w-8";
+			case "medium":
+				return "h-9 px-2 min-w-9";
+			case "large":
+				return "h-10 px-2.5 min-w-10";
+		}
 	};
 
 	return (
 		<button
 			className={cn(
-				"rounded-md px-4 py-2 transition-colors duration-200",
+				"min-w-0 flex-1 shrink-0 rounded-none shadow-none first:rounded-l-md last:rounded-r-md",
 				getButtonStyles(),
+				getSizeStyles(),
+				outline && "border-l-0 first:border-l",
 				className
 			)}
 			onClick={() => handleChange(value)}
@@ -41,4 +48,3 @@ export const ToggleButton = ({ value, children, className = "", ...rest }) => {
 		</button>
 	);
 };
-

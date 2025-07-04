@@ -2,21 +2,23 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { forwardRef } from "react";
-import { cn } from "../utils/cn";
+import { cn } from "../../utils/cn";
 import { useModal } from "./ModalContext";
 import { ModalPortal } from "./ModalPortal";
 
-export const ModalContent = forwardRef(
-	({ children, className = "", overlayClassName = "", ...rest }, ref) => {
+const ModalContentComponent = forwardRef(
+	({ children, className = "", ...rest }, ref) => {
 		const { isOpen } = useModal();
-
 		if (!isOpen) return null;
 
 		return (
 			<AnimatePresence>
-				<ModalPortal className={overlayClassName}>
+				<ModalPortal>
 					<motion.div
-						className={cn("aspect-ui-modal", className)}
+						className={cn(
+							"aspect-ui-modal bg-bg border border-border p-4 rounded-lg max-w-[calc(100%-2rem)] shadow-lg",
+							className
+						)}
 						{...rest}
 						ref={ref}
 						initial={{ scale: 0.5, opacity: 0, y: 40 }}
@@ -36,3 +38,6 @@ export const ModalContent = forwardRef(
 	}
 );
 
+ModalContentComponent.displayName = "ModalContent";
+
+export const ModalContent = ModalContentComponent;

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { cloneElement, isValidElement } from "react";
-import { cn } from "../utils/cn";
+import { cn } from "../../utils/cn";
 import { useAccordion } from "./AccordionContext";
 
 export const AccordionItem = ({
@@ -17,10 +17,7 @@ export const AccordionItem = ({
 	return (
 		<div
 			className={cn(
-				"overflow-hidden rounded-md border",
-				isOpen
-					? "border-primary-900 dark:border-primary-100"
-					: "border-primary-800 dark:border-primary-100",
+				"overflow-hidden rounded-md border border-border",
 				disabled ? "opacity-50" : "",
 				className
 			)}
@@ -39,4 +36,3 @@ export const AccordionItem = ({
 		</div>
 	);
 };
-

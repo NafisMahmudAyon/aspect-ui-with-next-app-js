@@ -1,6 +1,6 @@
 "use client";
 import { forwardRef } from "react";
-import { cn } from "../utils/cn";
+import { cn } from "../../utils/cn";
 import { useCarouselContext } from "./CarouselContext";
 import { DotButton, useDotButton } from "./CarouselDotButton";
 
@@ -22,11 +22,8 @@ export const CarouselIndicators = forwardRef(
 						key={number}
 						onClick={() => onDotButtonClick(index)}
 						className={cn(
-							"inline-flex size-3 rounded-full border-2 border-primary-300 dark:border-primary-800",
-							`${
-								index === selectedIndex &&
-								"border-primary-900 dark:border-primary-100"
-							}`,
+							"inline-flex size-3 rounded-full border-2 border-border",
+							`${index === selectedIndex && "border-primary"}`,
 							dotButtonStyle
 						)}
 					/>
@@ -37,4 +34,3 @@ export const CarouselIndicators = forwardRef(
 );
 
 CarouselIndicators.displayName = "CarouselIndicators";
-

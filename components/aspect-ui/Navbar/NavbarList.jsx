@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "../utils/cn";
+import { cn } from "../../utils/cn";
 import { useNavbar } from "./NavbarContext";
 
 export const NavbarList = ({ children, className = "", ...rest }) => {

@@ -1,49 +1,8 @@
 "use client";
 
-import { cn } from "../utils/cn";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import { cn } from "../../utils/cn";
 import { useAccordion } from "./AccordionContext";
-
-const Up = ({ className = "", size = 24, ...rest }) => {
-	return (
-		<svg
-			width={size}
-			height={size}
-			viewBox="0 0 24 24"
-			fill="none"
-			xmlns="http://www.w3.org/2000/svg"
-			className={className}
-			{...rest}>
-			<path
-				d="m5.996 14.996 6-6L18 15"
-				stroke="currentColor"
-				strokeWidth={1.6}
-				strokeLinecap="round"
-				strokeLinejoin="round"
-			/>
-		</svg>
-	);
-};
-
-const Down = ({ className = "", size = 24, ...rest }) => {
-	return (
-		<svg
-			width={size}
-			height={size}
-			viewBox="0 0 24 24"
-			fill="none"
-			xmlns="http://www.w3.org/2000/svg"
-			className={className}
-			{...rest}>
-			<path
-				d="m18 9-6 6-6.004-6.004"
-				stroke="currentColor"
-				strokeWidth={1.6}
-				strokeLinecap="round"
-				strokeLinejoin="round"
-			/>
-		</svg>
-	);
-};
 
 export const AccordionHeader = ({
 	children,
@@ -61,7 +20,6 @@ export const AccordionHeader = ({
 	headerClassName: headerHeaderClassName,
 	activeHeaderClassName: headerActiveHeaderClassName,
 	disabled = false,
-	reset = false,
 	tagName = "h2",
 	...rest
 }) => {
@@ -76,7 +34,6 @@ export const AccordionHeader = ({
 		activeLabelClassName: accordionActiveLabelClassName,
 		headerClassName: accordionHeaderClassName,
 		activeHeaderClassName: accordionActiveHeaderClassName,
-		reset: accordionReset,
 	} = useAccordion();
 	const TagName = tagName;
 	const iconEnabled = headerIconEnabled ?? accordionIconEnabled;
@@ -84,8 +41,10 @@ export const AccordionHeader = ({
 	const iconClassName = headerIconClassName ?? accordionIconClassName;
 	const activeIconClassName =
 		headerActiveIconClassName ?? accordionActiveIconClassName;
-	const activeIcon = headerActiveIcon ?? accordionActiveIcon ?? <Up />;
-	const inactiveIcon = headerInactiveIcon ?? accordionInactiveIcon ?? <Down />;
+	const activeIcon = headerActiveIcon ?? accordionActiveIcon ?? <ChevronUp />;
+	const inactiveIcon = headerInactiveIcon ?? accordionInactiveIcon ?? (
+		<ChevronDown />
+	);
 
 	const icon = isOpen ? activeIcon : inactiveIcon;
 	const iconClass = cn(
@@ -103,25 +62,11 @@ export const AccordionHeader = ({
 
 	const labelClass = cn(labelClassName, isOpen ? activeLabelClassName : "");
 	const headerClass = cn(headerClassName, isOpen ? activeHeaderClassName : "");
-	const accordionHeaderReset = accordionReset ?? reset;
+
 	return (
 		<TagName
 			className={cn(
-				"flex w-full items-center justify-between p-4 text-left transition-all duration-150 ease-in-out",
-				disabled
-					? ""
-					: `cursor-pointer ${
-							accordionHeaderReset
-								? ""
-								: "hover:bg-primary-200 dark:hover:bg-primary-900"
-					  }`,
-				isOpen
-					? accordionHeaderReset
-						? ""
-						: "bg-primary-200 text-primary-800 dark:bg-primary-900 dark:text-primary-200"
-					: accordionHeaderReset
-					? ""
-					: "bg-primary-100 text-primary-900 dark:bg-primary-800 dark:text-primary-100",
+				"flex w-full items-center justify-between p-4 bg-bg text-left transition-all duration-150 ease-in-out cursor-pointer text-text",
 				className,
 				headerClass
 			)}
@@ -129,13 +74,12 @@ export const AccordionHeader = ({
 			disabled={disabled}
 			{...rest}>
 			{iconEnabled && iconPosition === "left" && (
-				<span className={`${iconClass}`}>{icon}</span>
+				<span className={cn("text-text-muted", iconClass)}>{icon}</span>
 			)}
 			<span className={`${labelClass} grow`}>{children}</span>
 			{iconEnabled && iconPosition === "right" && (
-				<span className={`${iconClass}`}>{icon}</span>
+				<span className={cn("text-text-muted", iconClass)}>{icon}</span>
 			)}
 		</TagName>
 	);
 };
-

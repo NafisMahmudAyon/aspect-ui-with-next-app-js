@@ -1,16 +1,15 @@
-"use client";
+'use client'
 
-import { cn } from "../utils/cn";
+import React, { ReactNode } from 'react'
+import { cn } from '../../utils/cn'
 
-export const TableBody = ({ children, className = "" }) => {
-	return (
-		<tbody
-			className={cn(
-				"divide-y  divide-primary-50 border-b border-b-primary-50",
-				className
-			)}>
-			{children}
-		</tbody>
-	);
-};
-
+export const TableBody = ({
+  children,
+  className = ''
+}) => {
+  return (
+    <tbody className={cn("[&_tr:last-child]:border-0", className)}>
+      {children}
+    </tbody>
+  )
+}

@@ -1,10 +1,9 @@
-import { cn } from "../utils/cn";
+import { cn } from '../../utils/cn'
 
-export const CardContent = ({ children, className = "", ...rest }) => {
-	return (
-		<div className={cn("py-4", className)} {...rest}>
-			{children}
-		</div>
-	);
-};
-
+export const CardContent = ({
+  children,
+  className = '',
+  ...rest
+}) => {
+  return <div className={cn('px-6', className)} {...rest}>{children}</div>
+}

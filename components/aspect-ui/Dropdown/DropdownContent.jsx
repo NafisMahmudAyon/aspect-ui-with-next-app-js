@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { cn } from "../utils/cn";
+import { cn } from "../../utils/cn";
 import { useDropdown } from "./DropdownContext";
 
 export const DropdownContent = ({ children, className = "", ...rest }) => {
 	const { isOpen, positionClass } = useDropdown();
-
 	const contentRef = useRef(null);
 
 	useEffect(() => {
@@ -19,7 +18,6 @@ export const DropdownContent = ({ children, className = "", ...rest }) => {
 				const containerHeight = container.clientHeight;
 				const itemTop = selectedItem.offsetTop;
 				const itemHeight = selectedItem.offsetHeight;
-
 				container.scrollTop = itemTop - containerHeight / 2 + itemHeight / 2;
 			}
 		}
@@ -29,13 +27,11 @@ export const DropdownContent = ({ children, className = "", ...rest }) => {
 
 	return (
 		<div
-			className={cn("absolute z-10", positionClass, className)}
+			className={cn("absolute z-10 bg-bg rounded-md", positionClass, className)}
 			ref={contentRef}
+			role="presentation"
 			{...rest}>
-			{/* <div className=" border border-primary-50 dark:border-primary-950 rounded-md shadow-lg"> */}
 			{children}
-			{/* </div> */}
 		</div>
 	);
 };
-

@@ -1,9 +1,9 @@
 "use client";
 import { motion } from "framer-motion";
 import { forwardRef } from "react";
-import { cn } from "../utils/cn";
+import { cn } from "../../utils/cn";
 
-export const ModalOverlay = forwardRef(
+export const ModalOverlayComponent = forwardRef(
 	({ children, className, ...props }, ref) => {
 		return (
 			<motion.div
@@ -22,3 +22,7 @@ export const ModalOverlay = forwardRef(
 		);
 	}
 );
+
+ModalOverlayComponent.displayName = "ModalOverlay";
+
+export const ModalOverlay = ModalOverlayComponent;

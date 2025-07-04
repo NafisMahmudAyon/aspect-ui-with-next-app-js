@@ -21,6 +21,7 @@ export const ToggleButtonGroupProvider = ({
 	onChange,
 	outline = false,
 	disabled = false,
+	size = "medium",
 }) => {
 	const [selectedValues, setSelectedValues] = useState(defaultValue);
 
@@ -45,9 +46,8 @@ export const ToggleButtonGroupProvider = ({
 
 	return (
 		<ToggleButtonGroupContext.Provider
-			value={{ type, selectedValues, handleChange, outline, disabled }}>
+			value={{ type, selectedValues, handleChange, outline, disabled, size }}>
 			{children}
 		</ToggleButtonGroupContext.Provider>
 	);
 };
-

@@ -1,4 +1,4 @@
-import { cn } from "../utils/cn";
+import { cn } from "../../utils/cn";
 
 export const Spinner = ({
 	size = "medium",
@@ -15,7 +15,7 @@ export const Spinner = ({
 	return (
 		<div
 			className={cn(
-				"inline-block animate-spin rounded-full border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite] text-primary-800 dark:text-primary-200",
+				"inline-block animate-spin rounded-full border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite] text-primary",
 				sizeClasses[size],
 				className
 			)}
@@ -25,4 +25,3 @@ export const Spinner = ({
 			{...rest}></div>
 	);
 };
-

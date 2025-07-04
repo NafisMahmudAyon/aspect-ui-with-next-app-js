@@ -1,6 +1,5 @@
-"use client";
-
-import { cn } from "../utils/cn";
+'use client'
+import { cn } from "../../utils/cn";
 
 export const NavbarContainer = ({ children, className = "", ...rest }) => {
 	return (
@@ -14,4 +13,3 @@ export const NavbarContainer = ({ children, className = "", ...rest }) => {
 		</div>
 	);
 };
-

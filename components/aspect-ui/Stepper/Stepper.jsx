@@ -20,7 +20,7 @@ const Stepper = ({ children, initialStep = 0 }) => {
 						{index > 0 && (
 							<div
 								className={`mx-2 h-0.5 grow ${
-									index <= activeStep ? "bg-blue-500" : "bg-gray-300"
+									index <= activeStep ? "bg-primary" : "bg-bg"
 								}`}
 							/>
 						)}
@@ -46,9 +46,9 @@ const StepperItem = ({ icon, label, children, index }) => {
 	const active = index === activeStep;
 
 	const getStateStyles = () => {
-		if (completed) return "bg-blue-500 text-white";
-		if (active) return "border-blue-500 text-blue-500";
-		return "bg-white border-gray-300 text-gray-500";
+		if (completed) return "bg-primary text-primary-foreground";
+		if (active) return "border-primary text-text";
+		return "bg-bg border-border text-text-muted";
 	};
 
 	const handleClick = () => {
@@ -64,7 +64,10 @@ const StepperItem = ({ icon, label, children, index }) => {
 				onClick={handleClick}>
 				{completed ? "✓" : icon}
 			</div>
-			<p className={`mt-2 text-sm ${active ? "font-medium" : "text-gray-500"}`}>
+			<p
+				className={`mt-2 text-sm ${
+					active ? "font-medium text-text" : "text-text-muted"
+				}`}>
 				{label}
 			</p>
 			{children && <div className="mt-2">{children}</div>}
@@ -72,6 +75,7 @@ const StepperItem = ({ icon, label, children, index }) => {
 	);
 };
 
+// Custom hook to access the Stepper context
 const useStepper = () => {
 	const context = useContext(StepperContext);
 	if (!context) {
@@ -81,4 +85,3 @@ const useStepper = () => {
 };
 
 export { Stepper, StepperItem, useStepper };
-

@@ -1,22 +1,22 @@
 "use client";
+import { ChevronRight } from "lucide-react";
 import React, { Children } from "react";
-import { Right } from "../Icon/Arrow";
-import { cn } from "../utils/cn";
+import { cn } from "../../utils/cn";
 
 export const Breadcrumb = ({
 	children,
 	className = "",
-	separator = <Right />,
+	separator = <ChevronRight />,
 	separatorClassName = "",
 	...rest
 }) => {
-	// Safely convert children to an array
+  
 	const childrenArray = Children.toArray(children);
 
 	return (
 		<ul
 			className={cn(
-				"flex max-w-max items-center gap-3 px-3.5 py-2.5 text-primary-800 dark:text-primary-100",
+				"text-muted flex flex-wrap items-center gap-1.5 text-sm break-words sm:gap-2.5",
 				className
 			)}
 			{...rest}>
@@ -24,7 +24,7 @@ export const Breadcrumb = ({
 				<React.Fragment key={index}>
 					{child}
 					{index < childrenArray.length - 1 && (
-						<span className={cn("mx-2 text-primary-500", separatorClassName)}>
+						<span className={cn("mx-2 text-muted", separatorClassName)}>
 							{separator}
 						</span>
 					)}
@@ -35,4 +35,3 @@ export const Breadcrumb = ({
 };
 
 Breadcrumb.displayName = "Breadcrumb";
-

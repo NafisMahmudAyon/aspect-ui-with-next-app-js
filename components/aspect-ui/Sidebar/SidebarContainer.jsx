@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "../utils/cn";
+import { cn } from "../../utils/cn";
 
 export const SidebarContainer = ({ children, className = "", ...rest }) => {
 	return (
@@ -11,4 +11,3 @@ export const SidebarContainer = ({ children, className = "", ...rest }) => {
 		</div>
 	);
 };
-

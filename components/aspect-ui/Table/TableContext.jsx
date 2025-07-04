@@ -15,4 +15,3 @@ export const useTable = () => {
 	}
 	return context;
 };
-

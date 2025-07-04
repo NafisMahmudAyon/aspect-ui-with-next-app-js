@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { cn } from "../utils/cn";
+import { cn } from "../../utils/cn";
 
 export const Toggle = ({
 	value,
@@ -9,6 +9,7 @@ export const Toggle = ({
 	defaultSelected = false,
 	outline = false,
 	disabled = false,
+	size = "medium",
 	onChange,
 	...rest
 }) => {
@@ -22,26 +23,32 @@ export const Toggle = ({
 	};
 
 	const getButtonStyles = () => {
-		if (disabled) {
-			return "text-secondary-300 dark:text-secondary-900";
-		}
-
 		if (outline) {
 			return isSelected
-				? "border border-primary-200 dark:border-primary-900 bg-primary-200 dark:bg-primary-900 text-primary-800 dark:text-primary-200 "
-				: "border border-primary-200 dark:border-primary-900 hover:border-primary-200 dark:hover:border-primary-900 hover:bg-primary-200 dark:hover:bg-primary-900 text-primary-800 dark:text-primary-200";
+				? "border border-border bg-bg-light text-text"
+				: "border border-border bg-transparent shadow-xs hover:bg-bg-light hover:text-text-muted";
 		}
 
-		return isSelected
-			? "bg-primary-200 dark:bg-primary-900 text-primary-800 dark:text-primary-200"
-			: "hover:bg-primary-200 dark:hover:bg-primary-900 text-primary-800 dark:text-primary-200 ";
+		return isSelected ? "bg-bg-light text-text" : "bg-transparent";
+	};
+
+	const getSizeStyles = () => {
+		switch (size) {
+			case "small":
+				return "h-8 px-1.5 min-w-8";
+			case "medium":
+				return "h-9 px-2 min-w-9";
+			case "large":
+				return "h-10 px-2.5 min-w-10";
+		}
 	};
 
 	return (
 		<button
 			className={cn(
-				"rounded-md px-4 py-2 transition-all duration-200",
+				"inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium hover:bg-bg-light hover:text-text-muted disabled:pointer-events-none disabled:opacity-50 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] outline-none transition-[color,box-shadow] whitespace-nowrap",
 				getButtonStyles(),
+				getSizeStyles(),
 				className
 			)}
 			onClick={handleClick}
@@ -51,4 +58,3 @@ export const Toggle = ({
 		</button>
 	);
 };
-

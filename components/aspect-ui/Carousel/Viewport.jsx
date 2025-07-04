@@ -13,4 +13,3 @@ export const CarouselViewport = forwardRef(({ children }, ref) => {
 });
 
 CarouselViewport.displayName = "CarouselViewport";
-

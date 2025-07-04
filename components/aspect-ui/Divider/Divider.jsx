@@ -1,4 +1,4 @@
-import { cn } from "../utils/cn";
+import { cn } from "../../utils/cn";
 
 export const Divider = ({
 	orientation = "horizontal",
@@ -24,7 +24,7 @@ export const Divider = ({
 		"2xl": "border-l-[6px]",
 	};
 
-	const baseStyles = `border-primary-500 ${
+	const baseStyles = `border-border ${
 		orientation === "horizontal"
 			? horizontalSizeStyles[size]
 			: verticalSizeStyles[size]
@@ -79,4 +79,3 @@ export const Divider = ({
 		</div>
 	);
 };
-

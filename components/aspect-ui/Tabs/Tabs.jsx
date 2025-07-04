@@ -14,4 +14,3 @@ export const Tabs = ({ children, defaultActive, className, ...rest }) => {
 		</TabsProvider>
 	);
 };
-

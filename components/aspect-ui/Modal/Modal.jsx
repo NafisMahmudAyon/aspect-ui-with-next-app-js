@@ -20,13 +20,13 @@ export const Modal = ({ children, isOpenExternal, onToggle }) => {
 	useEffect(() => {
 		const handleEscapeKeyPress = (event) => {
 			if (event.key === "Escape") {
-				isOpen && handleOpen();
+				handleOpen();
 			}
 		};
 
 		const handleClickOutsideModal = (event) => {
 			if (!event.target.closest(".aspect-ui-modal")) {
-				isOpen && handleOpen();
+				handleOpen();
 			}
 		};
 
@@ -45,4 +45,3 @@ export const Modal = ({ children, isOpenExternal, onToggle }) => {
 		<ModalProvider value={{ isOpen, handleOpen }}>{children}</ModalProvider>
 	);
 };
-

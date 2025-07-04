@@ -1,7 +1,7 @@
 "use client";
 
 import { forwardRef } from "react";
-import { cn } from "../utils/cn";
+import { cn } from "../../utils/cn";
 
 export const Textarea = forwardRef(
 	(
@@ -21,7 +21,7 @@ export const Textarea = forwardRef(
 				{label && (
 					<label
 						className={cn(
-							"mb-1 block text-sm font-medium text-secondary-800 dark:text-secondary-200",
+							"mb-1 block text-sm font-medium text-text",
 							labelClassName
 						)}>
 						{label}
@@ -29,8 +29,8 @@ export const Textarea = forwardRef(
 				)}
 				<textarea
 					ref={ref}
-					className={`w-full rounded-md border bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 placeholder:text-secondary-500 px-3 py-2 shadow-xs focus-visible:border-primary-200 focus:outline-hidden focus:ring-2 focus:ring-primary-200 ${
-						error ? "border-error-500" : "border-gray-300"
+					className={`w-full rounded-md border placeholder:text-text-muted shadow-xs selection:bg-primary selection:text-primary-foreground focus-visible:border-border focus:outline-hidden focus:ring-2 focus:ring-border px-3 py-2 ${
+						error ? "border-error-500" : "border-border"
 					} ${className})`}
 					{...rest}
 				/>
@@ -45,4 +45,3 @@ export const Textarea = forwardRef(
 );
 
 Textarea.displayName = "Textarea";
-

@@ -1,5 +1,5 @@
 import React from "react";
-import { cn } from "../utils/cn";
+import { cn } from "../../utils/cn";
 import { TimelineItem } from "./TimelineItem";
 
 export const Timeline = ({
@@ -21,13 +21,14 @@ export const Timeline = ({
 			{...rest}>
 			<div
 				className={cn(
-					"absolute h-full border border-primary-900 dark:border-primary-200",
+					"absolute h-full border border-border",
 					position === "mixed"
 						? "left-1/2 -translate-x-1/2"
 						: position === "left"
 						? "right-0"
 						: "",
-					lineStyle === "dashed" ? "border-dashed" : ""
+					lineStyle === "dashed" ? "border-dashed" : "",
+					lineClassName
 				)}></div>
 			<div className="relative">
 				{React.Children.map(children, (child, index) => {
@@ -47,4 +48,3 @@ export const Timeline = ({
 		</div>
 	);
 };
-

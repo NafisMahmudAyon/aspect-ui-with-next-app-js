@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "../utils/cn";
+import { cn } from "../../utils/cn";
 import { ToggleButtonGroupProvider } from "./ToggleButtonGroupContext";
 
 export const ToggleButtonGroup = ({
@@ -20,10 +20,15 @@ export const ToggleButtonGroup = ({
 			onChange={onChange}
 			outline={outline}
 			disabled={disabled}>
-			<div className={cn("flex space-x-2", className)} {...rest}>
+			<div
+				className={cn(
+					"flex items-center rounded-md",
+					outline && "shadow-xs",
+					className
+				)}
+				{...rest}>
 				{children}
 			</div>
 		</ToggleButtonGroupProvider>
 	);
 };
-

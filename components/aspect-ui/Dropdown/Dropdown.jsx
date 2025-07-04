@@ -7,7 +7,7 @@ export const Dropdown = ({
 	children,
 	hover = false,
 	hoverDelay = 0,
-	closeDelay = 300,
+	closeDelay = 100,
 	direction = "bottom",
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -64,7 +64,7 @@ export const Dropdown = ({
 			case "top-left":
 				return "bottom-full right-0 mb-2";
 			default:
-				return "top-full left-0 mt-2"; // bottom (default)
+				return "top-full left-0 mt-2";
 		}
 	};
 
@@ -88,4 +88,3 @@ export const Dropdown = ({
 		</DropdownProvider>
 	);
 };
-
