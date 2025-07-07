@@ -2,13 +2,9 @@
 import { HTMLAttributes } from 'react'
 import { cn } from '../../utils/cn'
 
-export const BreadcrumbItem = ({
-  children,
-  className = "",
-  ...rest
-}) => {
+export const BreadcrumbItem = ({ children, className = '', ...rest }) => {
   return (
-    <li className={cn("flex cursor-pointer items-center", className)} {...rest} >
+    <li className={cn('flex cursor-pointer items-center', className)} {...rest}>
       {children}
     </li>
   )

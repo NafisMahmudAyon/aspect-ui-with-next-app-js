@@ -1,15 +1,16 @@
-"use client";
+'use client'
 
-import { cn } from "../../utils/cn";
+import { cn } from '../../utils/cn'
 
-export const TableRow = ({ children, className = "" }) => {
-	return (
-		<tr
-			className={cn(
-				"hover:bg-bg-light/50 border-b border-b-border transition-colors",
-				className
-			)}>
-			{children}
-		</tr>
-	);
-};
+export const TableRow = ({ children, className = '' }) => {
+  return (
+    <tr
+      className={cn(
+        'hover:bg-bg-light/50 border-b-border border-b transition-colors',
+        className
+      )}
+    >
+      {children}
+    </tr>
+  )
+}

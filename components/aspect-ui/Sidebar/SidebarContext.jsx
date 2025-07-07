@@ -4,15 +4,17 @@ import React, { createContext, useContext, useState } from 'react'
 
 const SidebarContext = createContext(undefined)
 
-export const SidebarProvider = ({
-  children
-}) => {
+export const SidebarProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false)
 
-  const toggleSidebar = () => setIsOpen(prev => !prev)
+  const toggleSidebar = () => {
+    console.log('clicked')
+    setIsOpen(prev => !prev)
+  }
+  const closeSidebar = () => setIsOpen(false)
 
   return (
-    <SidebarContext.Provider value={{ isOpen, toggleSidebar }}>
+    <SidebarContext.Provider value={{ isOpen, toggleSidebar, closeSidebar }}>
       {children}
     </SidebarContext.Provider>
   )

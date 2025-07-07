@@ -8,11 +8,17 @@ export const NavbarCollapseBtn = ({ className = '', icon, ...rest }) => {
 
   return (
     <button
-      className={cn('rounded-md p-2 text-text hover:bg-bg-light focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-border focus-visible:bg-bg-light', `block ${collapseBreakpoint === 'sm' && 'sm:hidden'} ${collapseBreakpoint === 'md' && 'md:hidden'} ${collapseBreakpoint === 'lg' && 'lg:hidden'} ${collapseBreakpoint === 'xl' && 'xl:hidden'} ${collapseBreakpoint === '2xl' && '2xl:hidden'}`, className)}
+      className={cn(
+        'text-text hover:bg-bg-light focus-visible:outline-hidden focus-visible:ring-border focus-visible:bg-bg-light rounded-md p-2 focus-visible:ring-2',
+        `block ${collapseBreakpoint === 'sm' && 'sm:hidden'} ${collapseBreakpoint === 'md' && 'md:hidden'} ${collapseBreakpoint === 'lg' && 'lg:hidden'} ${collapseBreakpoint === 'xl' && 'xl:hidden'} ${collapseBreakpoint === '2xl' && '2xl:hidden'}`,
+        className
+      )}
       onClick={toggleCollapse}
       {...rest}
     >
-      {icon ? icon :
+      {icon ? (
+        icon
+      ) : (
         <svg
           className='h-6 w-6'
           xmlns='http://www.w3.org/2000/svg'
@@ -27,7 +33,7 @@ export const NavbarCollapseBtn = ({ className = '', icon, ...rest }) => {
             d='M4 6h16M4 12h16m-7 6h7'
           />
         </svg>
-      }
+      )}
     </button>
   )
 }

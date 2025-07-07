@@ -1,47 +1,47 @@
-"use client";
+'use client'
 
-import { useCallback, useEffect, useState } from "react";
-import { ModalProvider } from "./ModalContext";
+import { useCallback, useEffect, useState } from 'react'
+import { ModalProvider } from './ModalContext'
 
 export const Modal = ({ children, isOpenExternal, onToggle }) => {
-	const [isOpenInternal, setIsOpenInternal] = useState(false);
+  const [isOpenInternal, setIsOpenInternal] = useState(false)
 
-	const isOpen = isOpenExternal ?? isOpenInternal;
+  const isOpen = isOpenExternal ?? isOpenInternal
 
-	const handleOpen = useCallback(() => {
-		const newState = !isOpen;
-		if (onToggle) {
-			onToggle(newState);
-		} else {
-			setIsOpenInternal(newState);
-		}
-	}, [isOpen, onToggle]);
+  const handleOpen = useCallback(() => {
+    const newState = !isOpen
+    if (onToggle) {
+      onToggle(newState)
+    } else {
+      setIsOpenInternal(newState)
+    }
+  }, [isOpen, onToggle])
 
-	useEffect(() => {
-		const handleEscapeKeyPress = (event) => {
-			if (event.key === "Escape") {
-				handleOpen();
-			}
-		};
+  useEffect(() => {
+    const handleEscapeKeyPress = event => {
+      if (event.key === 'Escape') {
+        handleOpen()
+      }
+    }
 
-		const handleClickOutsideModal = (event) => {
-			if (!event.target.closest(".aspect-ui-modal")) {
-				handleOpen();
-			}
-		};
+    const handleClickOutsideModal = event => {
+      if (!event.target.closest('.aspect-ui-modal')) {
+        handleOpen()
+      }
+    }
 
-		if (isOpen) {
-			document.addEventListener("keydown", handleEscapeKeyPress);
-			document.addEventListener("mousedown", handleClickOutsideModal);
-		}
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscapeKeyPress)
+      document.addEventListener('mousedown', handleClickOutsideModal)
+    }
 
-		return () => {
-			document.removeEventListener("keydown", handleEscapeKeyPress);
-			document.removeEventListener("mousedown", handleClickOutsideModal);
-		};
-	}, [isOpen, handleOpen]);
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKeyPress)
+      document.removeEventListener('mousedown', handleClickOutsideModal)
+    }
+  }, [isOpen, handleOpen])
 
-	return (
-		<ModalProvider value={{ isOpen, handleOpen }}>{children}</ModalProvider>
-	);
-};
+  return (
+    <ModalProvider value={{ isOpen, handleOpen }}>{children}</ModalProvider>
+  )
+}

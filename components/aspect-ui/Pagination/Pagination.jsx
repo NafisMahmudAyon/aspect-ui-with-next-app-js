@@ -27,7 +27,7 @@ export const Pagination = ({
 }) => {
   const [currentPage, setCurrentPage] = useState(defaultPage)
 
-  const convertToRoman = (num) => {
+  const convertToRoman = num => {
     const romanNumerals = [
       { value: 1000, symbol: 'M' },
       { value: 900, symbol: 'CM' },
@@ -61,7 +61,7 @@ export const Pagination = ({
     return Array.from({ length: end - start + 1 }, (_, i) => start + i)
   }
 
-  const handlePageChange = (page) => {
+  const handlePageChange = page => {
     if (page >= 1 && page <= count) {
       setCurrentPage(page)
       onChange(page)
@@ -116,7 +116,7 @@ export const Pagination = ({
     return paginationItems
   }
 
-  const buttonPage = (type) => {
+  const buttonPage = type => {
     switch (type) {
       case 'first':
         return 1
@@ -134,11 +134,18 @@ export const Pagination = ({
   const paginationItems = generatePaginationItems()
 
   return (
-    <nav className={cn('flex items-center justify-center space-x-2 flex-wrap', className)}>
+    <nav
+      className={cn(
+        'flex flex-wrap items-center justify-center space-x-2',
+        className
+      )}
+    >
       {paginationItems.map((item, index) => (
         <React.Fragment key={index}>
           {item === 'start-ellipsis' || item === 'end-ellipsis' ? (
-            <span className={cn('px-3 py-1 text-text', ellipsisClassName)}>...</span>
+            <span className={cn('text-text px-3 py-1', ellipsisClassName)}>
+              ...
+            </span>
           ) : (
             <button
               onClick={() =>
@@ -149,23 +156,31 @@ export const Pagination = ({
               disabled={
                 typeof item === 'string'
                   ? (item === 'previous' && currentPage === 1) ||
-                  (item === 'next' && currentPage === count)
+                    (item === 'next' && currentPage === count)
                   : false
               }
-              className={cn('rounded-md px-3 py-1 text-text hover:bg-bg-light', currentPage === item
-                && 'bg-bg-light/50 hover:bg-bg-light border border-border', item === 'first' && firstButtonClassName, item === 'last' && lastButtonClassName, item === 'next' && nextButtonClassName, item === 'previous' && previousButtonClassName, currentPage === item && activeClassName, buttonClassName)}
+              className={cn(
+                'text-text hover:bg-bg-light rounded-md px-3 py-1',
+                currentPage === item &&
+                  'bg-bg-light/50 hover:bg-bg-light border-border border',
+                item === 'first' && firstButtonClassName,
+                item === 'last' && lastButtonClassName,
+                item === 'next' && nextButtonClassName,
+                item === 'previous' && previousButtonClassName,
+                currentPage === item && activeClassName,
+                buttonClassName
+              )}
             >
               {item === 'first' && firstButton}
               {item === 'previous' && previousButton}
               {item === 'next' && nextButton}
               {item === 'last' && lastButton}
-              {typeof item === 'number' && (
-                numberType === 'roman'
+              {typeof item === 'number' &&
+                (numberType === 'roman'
                   ? convertToRoman(item)
                   : numberType === 'custom' && numbers.length >= count
                     ? numbers[item - 1]
-                    : item
-              )}
+                    : item)}
             </button>
           )}
         </React.Fragment>

@@ -9,9 +9,9 @@ export const Radio = ({
   value,
   label,
   checked,
-  className = "",
-  labelClassName = "",
-  wrapperClassName = "",
+  className = '',
+  labelClassName = '',
+  wrapperClassName = '',
   onChange
 }) => {
   return (
@@ -23,9 +23,9 @@ export const Radio = ({
         value={value}
         checked={checked}
         onChange={onChange}
-        className={cn('form-radio h-5 w-5 accent-text', className)}
+        className={cn('form-radio accent-text h-5 w-5', className)}
       />
-      <label htmlFor={id} className={cn('ml-2 text-text', labelClassName)}>
+      <label htmlFor={id} className={cn('text-text ml-2', labelClassName)}>
         {label}
       </label>
     </div>

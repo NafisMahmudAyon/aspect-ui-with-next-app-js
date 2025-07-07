@@ -8,7 +8,7 @@ export const Slider = ({
   step = 1,
   defaultValue,
   onChange,
-  className = "",
+  className = '',
   disabled = false,
   ...rest
 }) => {
@@ -22,15 +22,15 @@ export const Slider = ({
   }, [values, onChange])
 
   // Helper function to round value to nearest step
-  const roundToStep = (value) => {
+  const roundToStep = value => {
     const steps = Math.round((value - min) / step)
-    return Math.min(max, Math.max(min, min + (steps * step)))
+    return Math.min(max, Math.max(min, min + steps * step))
   }
 
-  const handleMouseDown = (index) => (e) => {
+  const handleMouseDown = index => e => {
     e.preventDefault()
 
-    const handleMouseMove = (e) => {
+    const handleMouseMove = e => {
       if (sliderRef.current) {
         const rect = sliderRef.current.getBoundingClientRect()
         const percentage = Math.max(
@@ -57,29 +57,37 @@ export const Slider = ({
     document.addEventListener('mouseup', handleMouseUp)
   }
 
-  const getLeftPosition = (value) => {
+  const getLeftPosition = value => {
     return ((value - min) / (max - min)) * 100
   }
 
   return (
     <div
-      className={cn('relative h-2 w-full rounded-full bg-bg-light', disabled && 'opacity-50 cursor-not-allowed pointer-events-none', className)}
+      className={cn(
+        'bg-bg-light relative h-2 w-full rounded-full',
+        disabled && 'pointer-events-none cursor-not-allowed opacity-50',
+        className
+      )}
       ref={sliderRef}
       {...rest}
     >
       <div
-        className='absolute h-full rounded-full bg-primary'
+        className='bg-primary absolute h-full rounded-full'
         style={{
           left: `${values.length === 1 ? '0' : getLeftPosition(values[0])}%`,
-          right: `${values.length === 1
-            ? 100 - getLeftPosition(values[0])
-            : 100 - getLeftPosition(values[1])}%`
+          right: `${
+            values.length === 1
+              ? 100 - getLeftPosition(values[0])
+              : 100 - getLeftPosition(values[1])
+          }%`
         }}
       ></div>
       {values.map((value, index) => (
         <div
           key={index}
-          className={cn('absolute size-4 cursor-pointer rounded-full border-2 border-primary  bg-primary-foreground')}
+          className={cn(
+            'border-primary bg-primary-foreground absolute size-4 cursor-pointer rounded-full border-2'
+          )}
           style={{
             left: `calc(${getLeftPosition(value)}% - 0.5rem)`,
             top: '-0.25rem'

@@ -28,7 +28,7 @@ export const AvatarImage = ({
         alt={altText || 'alt text'}
         {...(name && { title: name })}
         className={cn(
-          'aspect-square rounded-full h-auto max-w-full overflow-hidden object-cover',
+          'aspect-square h-auto max-w-full overflow-hidden rounded-full object-cover',
           className
         )}
         {...rest}

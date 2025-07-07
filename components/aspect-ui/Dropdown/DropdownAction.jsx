@@ -5,7 +5,13 @@ import React, { ReactElement, ReactNode, useEffect, useState } from 'react'
 import { cn } from '../../utils/cn'
 import { useDropdown } from './DropdownContext'
 
-export const DropdownAction = ({ children, className = "", icon, iconPosition = "end", ...rest }) => {
+export const DropdownAction = ({
+  children,
+  className = '',
+  icon,
+  iconPosition = 'end',
+  ...rest
+}) => {
   const { toggleDropdown, direction } = useDropdown()
   const [iconDefault, setIconDefault] = useState(<ChevronDown />)
   useEffect(() => {
@@ -18,12 +24,15 @@ export const DropdownAction = ({ children, className = "", icon, iconPosition = 
     if (direction == 'right') {
       setIconDefault(<ChevronRight />)
     }
-  }, [direction]);
+  }, [direction])
 
   return (
     <button
       type='button'
-      className={cn('flex w-fit justify-center items-center gap-2 border border-border rounded-md bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-border', className)}
+      className={cn(
+        'border-border shadow-xs focus-visible:outline-hidden focus-visible:ring-border flex w-fit items-center justify-center gap-2 whitespace-nowrap rounded-md border bg-transparent px-3 py-2 text-sm focus-visible:ring-2',
+        className
+      )}
       onClick={toggleDropdown}
       {...rest}
     >
