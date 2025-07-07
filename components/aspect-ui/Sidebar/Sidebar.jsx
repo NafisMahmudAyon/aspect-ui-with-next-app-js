@@ -24,6 +24,8 @@ export const Sidebar = ({
         return '2xl:flex 2xl:translate-x-0 2xl:relative'
       case '2xl':
         return ''
+      case 'none':
+        return 'flex !translate-x-0 relative'
       default:
         return 'lg:flex lg:translate-x-0 lg:relative'
     }
