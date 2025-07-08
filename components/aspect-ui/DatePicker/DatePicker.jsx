@@ -30,7 +30,7 @@ export const DatePicker = ({
   const [selectedDates, setSelectedDates] = useState(
     initialDates.map(date => new Date(date))
   )
-  // const [isOpen, setIsOpen] = useState(show)
+
   const [years, setYears] = useState([])
 
   const monthNames = [

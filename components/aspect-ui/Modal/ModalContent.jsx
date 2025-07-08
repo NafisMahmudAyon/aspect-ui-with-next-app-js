@@ -7,13 +7,13 @@ import { useModal } from './ModalContext'
 import { ModalPortal } from './ModalPortal'
 
 const ModalContentComponent = forwardRef(
-  ({ children, className = '', ...rest }, ref) => {
+  ({ children, className = '', overlayClassName = '', ...rest }, ref) => {
     const { isOpen } = useModal()
     if (!isOpen) return null
 
     return (
       <AnimatePresence>
-        <ModalPortal>
+        <ModalPortal overlayClassName={overlayClassName}>
           <motion.div
             className={cn(
               'aspect-ui-modal bg-bg border-border max-w-[calc(100%-2rem)] rounded-lg border p-4 shadow-lg',
