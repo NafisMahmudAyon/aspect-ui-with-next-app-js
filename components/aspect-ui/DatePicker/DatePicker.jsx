@@ -304,7 +304,7 @@ export const DatePicker = ({
                         ? 'rounded-md'
                         : '',
                     !date && 'invisible',
-                    date && 'hover:bg-bg-light',
+                    date && 'hover:bg-primary hover:text-bg-light',
                     date &&
                       date.getDate() === currentDate.getDate() &&
                       ((isRange && selectedDates.length < 2) ||
@@ -314,13 +314,13 @@ export const DatePicker = ({
                       selectedDates.some(
                         d => d.toDateString() === date.toDateString()
                       ) &&
-                      'bg-primary text-primary-foreground',
+                      'bg-primary text-bg-light',
                     date &&
                       isRange &&
                       selectedDates.length === 2 &&
                       date > selectedDates[0] &&
                       date < selectedDates[1] &&
-                      'bg-primary text-primary-foreground'
+                      'bg-primary text-bg-light'
                   )}
                 >
                   {date ? date.getDate() : ''}
